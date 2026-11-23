@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <h1>Demo CDN</h1>
+    </header>
+    <main id="container">
+        <p>Mon nom est : {{ lastname }} </p>
+        <p>Mon prénom est : {{ firstname }} </p>
+    </main>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script>
+        // avec le CDN, il y a une variable globale vue disponible
+        const { createApp, ref } = Vue // idem que vue.createApp
+        createApp({
+            setup() {
+                // ref réactivité (si la donnée change, le DOM va être rechargé à tous les endroits où la donnée est utilise)
+                const firstname = ref('John') 
+                const lastname = ref('Doe')
+                return {
+                    firstname,
+                    lastname
+                }
+            }
+        })
+        .mount('main#container')
+
+    </script>
+</body>
+</html>
