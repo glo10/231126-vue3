@@ -87,14 +87,12 @@ function handleSubmitPayment() {
     <h1>Mon Panier</h1>
 
     <div>
-      <div>
-        <CartItem
-          v-for="item in cartItems"
-          :key="item.id"
-          :product="item"
-          @update-quantity="handleUpdateQuantity"
-        />
-      </div>
+      <CartItem
+        v-for="item in cartItems"
+        :key="item.id"
+        :product="item"
+        @update-quantity="handleUpdateQuantity"
+      />
 
       <DeliverySelector
         :relay-points="relayPoints"

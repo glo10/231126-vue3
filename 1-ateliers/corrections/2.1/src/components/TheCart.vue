@@ -8,8 +8,8 @@ const { product } = defineProps({
 
 const emit = defineEmits(['update-quantity'])
 
-function changeQuantity(v) {
-  emit('update-quantity', product.id, v)
+function changeQuantity(qty) {
+  emit('update-quantity', product.id, qty)
 }
 </script>
 
