@@ -1,88 +1,91 @@
 <script setup>
-import { ref, reactive, computed } from 'vue'
+import { ref, reactive, computed } from "vue";
 
-const showHelp = ref(false)
-const onlyInStock = ref(false)
+const showHelp = ref(false);
+const onlyInStock = ref(false);
 
 const order = reactive({
-  id: 'CMD-123456',
-  status: 'shipped',
+  id: "CMD-123456",
+  status: "shipped",
   customer: {
-    firstname: 'Alice',
-    lastname: 'Bob',
-    email: 'alice.bob@gmail.com',
+    firstname: "Alice",
+    lastname: "Bob",
+    email: "alice.bob@gmail.com",
   },
-  delivery: '1 rue de Paris, 75020 Paris',
-  carrier: 'UPS',
-  estimatedDeliveryDate: (new Date((new Date()).getTime() + (5 * 24 * 60 * 60 * 1000))).toLocaleDateString('fr'), // + 5 jours
-  cancellationReason: 'Stock épuisé',
+  delivery: "1 rue de Paris, 75020 Paris",
+  carrier: "UPS",
+  estimatedDeliveryDate: new Date(
+    new Date().getTime() + 5 * 24 * 60 * 60 * 1000
+  ).toLocaleDateString("fr"), // + 5 jours
+  cancellationReason: "Stock épuisé",
   items: [
     {
-      reference: 'ART-001',
-      name: 'Clavier',
+      reference: "ART-001",
+      name: "Clavier",
       price: 29.9,
       quantity: 1,
       inStock: true,
       rating: 5,
-      cover: 'https://www.manutan.fr/fstrz/r/s/www.manutan.fr/img/S/GRP/ST/AIG42308105.jpg'
+      cover:
+        "https://www.manutan.fr/fstrz/r/s/www.manutan.fr/img/S/GRP/ST/AIG42308105.jpg",
     },
     {
-      reference: 'ART-002',
-      name: 'Souris',
+      reference: "ART-002",
+      name: "Souris",
       price: 19.9,
       quantity: 2,
       inStock: true,
       rating: 4,
-      cover: '/img/product/002.jpg'
+      cover: "/img/product/002.jpg",
     },
     {
-      reference: 'ART-003',
-      name: 'Ecran',
+      reference: "ART-003",
+      name: "Ecran",
       price: 89.9,
       quantity: 0,
       inStock: false,
       rating: 3,
-      cover: '/img/product/003.jpg'
+      cover: "/img/product/003.jpg",
     },
   ],
-})
+});
 
 const statusMessage = computed(() => {
   switch (order.status) {
-    case 'pending':
-      return 'Votre commande est en attente de paiement.'
-    case 'paid':
-      return 'Votre paiement est validé, la préparation de votre commande va démarrer.'
-    case 'shipped':
-      return `Votre commande a été expédiée via ${order.carrier}.`
-    case 'delivered':
-      return `Votre commande a été livrée par le transporteur ${order.carrier}.`
-    case 'cancelled':
-      return 'Votre commande a été annulée.'
+    case "pending":
+      return "Votre commande est en attente de paiement.";
+    case "paid":
+      return "Votre paiement est validé, la préparation de votre commande va démarrer.";
+    case "shipped":
+      return `Votre commande a été expédiée via ${order.carrier}.`;
+    case "delivered":
+      return `Votre commande a été livrée par le transporteur ${order.carrier}.`;
+    case "cancelled":
+      return "Votre commande a été annulée.";
     default:
-      return 'Contactez le support'
+      return "Contactez le support";
   }
-})
+});
 const inStockItems = computed(() => {
-  return order.items.filter((item) => item.inStock)
-})
+  return order.items.filter((item) => item.inStock);
+});
 
 const displayedItems = computed(() => {
-  return onlyInStock.value ? inStockItems.value : order.items
-})
+  return onlyInStock.value ? inStockItems.value : order.items;
+});
 
 const totalPrice = computed(() => {
-  return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0)
-})
+  return order.items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+});
 
 function setItemRating(reference, rating) {
   if (rating < 1 || rating > 5) {
-    return
+    return;
   }
 
-  const targetItem = order.items.find((item) => item.reference === reference)
+  const targetItem = order.items.find((item) => item.reference === reference);
   if (targetItem) {
-    targetItem.rating = rating
+    targetItem.rating = rating;
   }
 }
 </script>
@@ -97,8 +100,10 @@ function setItemRating(reference, rating) {
     <template v-if="showHelp">
       <h3>Support et aide</h3>
       <p>
-        Contactez le support en indiquant votre identifiant de commande
-        (<strong>{{ order.id }}</strong>).
+        Contactez le support en indiquant votre identifiant de commande (<strong>{{
+          order.id
+        }}</strong
+        >).
       </p>
     </template>
   </header>
@@ -137,8 +142,9 @@ function setItemRating(reference, rating) {
       <li><strong>Statut actuel : </strong> {{ order.status }}</li>
       <li>
         <strong>Client : </strong>
-        {{ order.customer.firstname }} {{ order.customer.lastname }}
-        ({{ order.customer.email }})
+        {{ order.customer.firstname }} {{ order.customer.lastname }} ({{
+          order.customer.email
+        }})
       </li>
       <li><strong>Livraison : </strong> {{ order.delivery }}</li>
       <li><strong>Transporteur : </strong> {{ order.carrier }}</li>
@@ -158,22 +164,29 @@ function setItemRating(reference, rating) {
     <button type="button" @click="onlyInStock = !onlyInStock">
       {{
         onlyInStock
-          ? 'Afficher tous les articles'
-          : 'Afficher uniquement les articles en stock'
+          ? "Afficher tous les articles"
+          : "Afficher uniquement les articles en stock"
       }}
     </button>
 
     <template v-for="item in displayedItems" :key="item.reference">
       <article>
-        <div :style="item.inStock ? { color: 'blue' } : { color: 'grey', textDecoration: 'line-through' }">
+        <div
+          :style="
+            item.inStock
+              ? { color: 'blue' }
+              : { color: 'grey', textDecoration: 'line-through' }
+          "
+        >
           <strong>{{ item.name }}</strong>
           <span>Réf : {{ item.reference }}</span>
-          <img :src="item.cover" :alt="`cover of ${item.name} product`">
+          <img :src="item.cover" :alt="`cover of ${item.name} product`" />
         </div>
 
+        <p>Prix unitaire : {{ item.price.toFixed(2) }} €</p>
+        <p>Quantité : {{ item.quantity }}</p>
         <p>
-          Prix unitaire : {{ item.price.toFixed(2) }} € | Quantité :
-          {{ item.quantity }} | Sous-total :
+          Sous-total :
           <strong>{{ (item.price * item.quantity).toFixed(2) }} €</strong>
         </p>
 
@@ -184,20 +197,22 @@ function setItemRating(reference, rating) {
         </p>
         <div class="rating-controls">
           <span>Note ({{ item.rating }}/5) : </span>
-          <button v-for="star in 5" :key="star" type="button" :class="{ active: star <= item.rating }"
-            @click="setItemRating(item.reference, star)">
+          <button
+            v-for="star in 5"
+            :key="star"
+            type="button"
+            :class="{ active: star <= item.rating }"
+            @click="setItemRating(item.reference, star)"
+          >
             ★
           </button>
         </div>
       </article>
-      <hr>
+      <hr />
     </template>
-
   </section>
   <footer>
-    <p>
-      <strong>Prix total de la commande :</strong> {{ totalPrice.toFixed(2) }} €
-    </p>
+    <p><strong>Prix total de la commande :</strong> {{ totalPrice.toFixed(2) }} €</p>
   </footer>
 </template>
 <style scoped>
