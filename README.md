@@ -53,9 +53,8 @@
 
 ## Pinia
 
--[Plugin persistance](https://pinia.vuejs.org/core-concepts/plugins.html)
+- [Extensions de Pinia via la création de ses propres plugins](https://pinia.vuejs.org/core-concepts/plugins.html)
 - [Tests unitaires](https://pinia.vuejs.org/cookbook/testing.html#Unit-testing-components)
--[Tous les plugins](https://pinia.vuejs.org/core-concepts/plugins.html)
 - [Complément](https://masteringpinia.com/?utm_campaign=VueRouter_MP&utm_content=sidebar&utm_medium=vuerouter&utm_source=affiliate)
 
 ---

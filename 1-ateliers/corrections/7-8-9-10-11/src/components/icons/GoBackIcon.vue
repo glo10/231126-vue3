@@ -1,0 +1,18 @@
+<template>
+  <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
+    <!-- Icon from Tabler Icons by Paweł Kuna - https://github.com/tabler/tabler-icons/blob/master/LICENSE -->
+    <path
+      fill="none"
+      stroke="#000"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      stroke-width="2"
+      d="M5 12h14M5 12l6 6m-6-6l6-6"
+    />
+  </svg>
+</template>
+<style scoped>
+svg {
+  vertical-align: middle;
+}
+</style>

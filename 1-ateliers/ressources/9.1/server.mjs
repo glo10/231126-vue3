@@ -1,11 +1,11 @@
 import http from 'node:http'
 import { writeFile, readFile} from 'node:fs/promises'
-import path from 'node:path'
+import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __filename = fileURLToPath(import.meta.url)
-const __dirname = path.dirname(__filename)
-const TICKETS_FILE = path.join(__dirname, 'tickets.json')
+const __dirname = dirname(__filename)
+const TICKETS_FILE = join(__dirname, 'tickets.json')
 const PORT = 3000
 
 const VALID_TYPES = [
@@ -110,8 +110,8 @@ const server = http.createServer(async (req, res) => {
           sendJson(res, 400, { error: 'Type de demande invalide.' })
           return
         }
-        if (!body.message || String(body.message).trim().length < 100) {
-          sendJson(res, 400, { error: 'Le message doit contenir au moins 100 caractères.' })
+        if (!body.message || String(body.message).trim().length < 30) {
+          sendJson(res, 400, { error: 'Le message doit contenir au moins 30 caractères.' })
           return
         }
 

@@ -1,0 +1,36 @@
+.error {
+  color: #c62828;
+}
+
+.success,
+.error {
+  font-weight: 600;
+  margin-top: 0.5rem;
+}
+
+.success {
+  color: #2e7d32;
+}
+
+form {
+  padding: 1rem;
+}
+
+form div {
+  margin-bottom: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+form div input {
+  width: 50%;
+}
+
+form div input[type=submit] {
+  width: 100%;
+}
+
+article {
+  margin: 1rem;
+}
